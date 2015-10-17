@@ -7,7 +7,13 @@ Group:		Libraries
 Source0:	http://netix.dl.sourceforge.net/project/%{name}/%{name}-3.1/%{name}-%{version}_no_test_models.zip
 # Source0-md5:	ccd4788204509da58a3a53c7aeda7a8b
 URL:		http://sourceforge.net/projects/assimp/
+BuildRequires:	cmake
+BuildRequires:	libstdc++-devel
+BuildRequires:	minizip-devel
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.213
+BuildRequires:	unzip
+BuildRequires:	zziplib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
