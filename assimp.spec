@@ -38,7 +38,7 @@ assimplibrary.
 install -d build
 cd build
 %cmake \
-	CMAKE_HOME_DIR=/usr \
+	-DASSIMP_LIB_INSTALL_DIR=%{_libdir} \
 	..
 %{__make}
 
