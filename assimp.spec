@@ -1,19 +1,20 @@
 Summary:	Open Asset Import Library
+Summary(pl.UTF-8):	Asset Import - otwarta biblioteka do importu danych trójwymiarowych
 Name:		assimp
 Version:	3.1.1
 Release:	1
-License:	distributable
+License:	BSD
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/assimp/%{name}-%{version}_no_test_models.zip
 # Source0-md5:	ccd4788204509da58a3a53c7aeda7a8b
 URL:		http://sourceforge.net/projects/assimp/
-BuildRequires:	cmake
+BuildRequires:	cmake >= 2.6
 BuildRequires:	libstdc++-devel
 BuildRequires:	minizip-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	unzip
-BuildRequires:	zziplib-devel
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -22,14 +23,26 @@ formats such as Collada, Blend, Obj, X, 3DS, LWO, MD5, MD2, MD3, MDL,
 MS3D and a lot of other formats. The data is stored in an own
 in-memory data-format, which can be easily processed.
 
+%description -l pl.UTF-8
+Biblioteka importująca służąca do odczytu danych trójwymiarowych
+(assets) z różnych popularnych formatów plików, takich jak Collada,
+Blend, Obj, X, 3DS, LWO, MD5, MD2, MD3, MDL, MS3D i innych. Dane są
+przechowywane w pamięci, we własnym formacie, który można łatwo
+przetworzyć.
+
 %package devel
-Summary:	Header files for assimp
+Summary:	Header files for assimp library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki assimp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-The header files are only needed for development of programs using the
-assimplibrary.
+The header files needed for development of programs using the assimp
+library.
+
+%description devel -l pl.UTF-8
+Pliki nagłówkowe niezbędne do tworzenia programów wykorzystujących
+bibliotekę assimp.
 
 %prep
 %setup -q
@@ -37,9 +50,9 @@ assimplibrary.
 %build
 install -d build
 cd build
-%cmake \
-	-DASSIMP_LIB_INSTALL_DIR=%{_libdir} \
-	..
+%cmake .. \
+	-DASSIMP_LIB_INSTALL_DIR:PATH=%{_lib}
+
 %{__make}
 
 %install
@@ -55,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES CREDITS LICENSE README Readme.md
+%doc CHANGES CREDITS LICENSE Readme.md
 %attr(755,root,root) %{_libdir}/libassimp.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libassimp.so.3
 
