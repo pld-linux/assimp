@@ -1,13 +1,13 @@
 Summary:	Open Asset Import Library
 Summary(pl.UTF-8):	Asset Import - otwarta biblioteka do importu danych trójwymiarowych
 Name:		assimp
-Version:	3.1.1
+Version:	5.0.1
 Release:	1
 License:	BSD
 Group:		Libraries
-Source0:	http://downloads.sourceforge.net/assimp/%{name}-%{version}_no_test_models.zip
-# Source0-md5:	ccd4788204509da58a3a53c7aeda7a8b
-URL:		http://sourceforge.net/projects/assimp/
+Source0:	https://github.com/assimp/assimp/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	eb7b7385a5c3194ab46d7f869d7ac6cf
+URL:		https://www.assimp.org/
 BuildRequires:	cmake >= 2.6
 BuildRequires:	libstdc++-devel
 BuildRequires:	minizip-devel
@@ -70,12 +70,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES CREDITS LICENSE Readme.md
 %attr(755,root,root) %{_libdir}/libassimp.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libassimp.so.3
+%attr(755,root,root) %ghost %{_libdir}/libassimp.so.5
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/assimp
 %attr(755,root,root) %{_libdir}/libassimp.so
-%{_libdir}/cmake/assimp-3.1
+%{_libdir}/cmake/assimp-5.0
 %{_includedir}/assimp
 %{_pkgconfigdir}/assimp.pc
