@@ -1,0 +1,11 @@
+--- assimp-5.0.1/cmake-modules/FindIrrXML.cmake.orig	2020-01-12 12:56:40.000000000 +0100
++++ assimp-5.0.1/cmake-modules/FindIrrXML.cmake	2020-12-25 13:21:58.767549238 +0100
+@@ -7,7 +7,7 @@
+ #   IRRXML_LIBRARY        - IrrXML main library
+ 
+ find_path(IRRXML_INCLUDE_DIR irrXML.h
+-    PATH_SUFFIXES include/irrlicht include/irrxml)
++    PATH_SUFFIXES include/irrxml)
+ find_library(IRRXML_LIBRARY IrrXML)
+ 
+ include(FindPackageHandleStandardArgs)

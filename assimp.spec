@@ -2,13 +2,16 @@ Summary:	Open Asset Import Library
 Summary(pl.UTF-8):	Asset Import - otwarta biblioteka do importu danych trójwymiarowych
 Name:		assimp
 Version:	5.0.1
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 Source0:	https://github.com/assimp/assimp/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	eb7b7385a5c3194ab46d7f869d7ac6cf
+Patch0:		%{name}-irrxml.patch
+Patch1:		%{name}-pc.patch
 URL:		https://www.assimp.org/
-BuildRequires:	cmake >= 2.6
+BuildRequires:	cmake >= 3.0
+BuildRequires:	irrxml-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	minizip-devel
 BuildRequires:	pkgconfig
@@ -35,6 +38,8 @@ Summary:	Header files for assimp library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki assimp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	libstdc++-devel
+Requires:	zlib-devel
 
 %description devel
 The header files needed for development of programs using the assimp
@@ -46,17 +51,21 @@ bibliotekę assimp.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 install -d build
 cd build
 %cmake .. \
-	-DASSIMP_LIB_INSTALL_DIR:PATH=%{_lib}
+	-DASSIMP_LIB_INSTALL_DIR:PATH=%{_lib} \
+	-DSYSTEM_IRRXML=ON
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
