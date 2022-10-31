@@ -6,14 +6,13 @@
 Summary:	Open Asset Import Library
 Summary(pl.UTF-8):	Asset Import - otwarta biblioteka do importu danych trójwymiarowych
 Name:		assimp
-Version:	5.2.1
+Version:	5.2.5
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/assimp/assimp/releases
 Source0:	https://github.com/assimp/assimp/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	6726425e307b3356a5f121abe436f4f6
-Patch0:		%{name}-system-minizip.patch
+# Source0-md5:	0b5a5a2714f1126b9931cdb95f512c91
 URL:		https://www.assimp.org/
 BuildRequires:	cmake >= 3.10
 BuildRequires:	libstdc++-devel >= 6:4.7
@@ -56,13 +55,13 @@ bibliotekę assimp.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 install -d build
 cd build
 %cmake .. \
-	-DASSIMP_LIB_INSTALL_DIR:PATH=%{_lib}
+	-DASSIMP_LIB_INSTALL_DIR:PATH=%{_lib} \
+	-DASSIMP_BUILD_ASSIMP_TOOLS:BOOL=ON
 
 %{__make}
 
